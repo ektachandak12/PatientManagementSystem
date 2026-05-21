@@ -1,30 +1,32 @@
 package com.PMS.view.auth;
 
+import com.PMS.controller.authController.SignUpController;
+
 import javax.swing.*;
 import java.awt.*;
 
 /*
- * LoginFrame:
- * This class creates the login window for the Patient Management System.
- * It contains UI components like labels, text fields, and buttons.
+ * SignUpFrame:
+ * This class creates the signup window for the Patient Management System.
+ * It contains UI components required for user registration.
  */
-public class LoginFrame extends JFrame {
+public class SignUpFrame extends JFrame {
 
     // Labels for heading and input fields
-    JLabel heading, username, password;
+    private JLabel heading, username, password;
 
     // Input fields for username and password
-    JTextField usernameField;
-    JPasswordField passwordField;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
 
     // Buttons for different actions
-    JButton signupBtn, clearBtn, loginBtn;
+    private JButton signupBtn, clearBtn;
 
     /*
      * Constructor:
      * Calls initialize() to set up the complete UI.
      */
-    public LoginFrame() {
+    public SignUpFrame() {
         initialize();
     }
 
@@ -32,79 +34,69 @@ public class LoginFrame extends JFrame {
      * initialize():
      * Configures the JFrame and adds all UI components.
      */
-    private void initialize() {
+    public void initialize() {
 
         // JFrame basic settings
-        setTitle("Patient Management System");
-        setSize(500, 350);
+        setTitle("Sign Up");
+        setSize(450, 350);
         setLocationRelativeTo(null); // Centers frame on screen
         setLayout(null); // Using absolute positioning
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
-
-        // Set background color of frame
         getContentPane().setBackground(Color.white);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Main heading of login page
-        heading = new JLabel("Patient Management System");
+        // Main heading
+        heading = new JLabel("SIGN UP");
         heading.setFont(new Font("Osward", Font.BOLD, 25));
-        heading.setBounds(75, 20, 350, 30);
+        heading.setBounds(170, 20, 150, 30);
         heading.setForeground(Color.BLACK);
         add(heading);
 
         // Username label
         username = new JLabel("Username:");
         username.setFont(new Font("Raleway", Font.BOLD, 20));
-        username.setBounds(50, 80, 150, 30);
+        username.setBounds(40, 80, 120, 30);
         username.setForeground(Color.BLACK);
         add(username);
 
         // Username input field
         usernameField = new JTextField();
         usernameField.setFont(new Font("Raleway", Font.BOLD, 20));
-        usernameField.setBounds(200, 80, 200, 30);
+        usernameField.setBounds(180, 80, 200, 30);
         add(usernameField);
 
         // Password label
         password = new JLabel("Password:");
         password.setFont(new Font("Raleway", Font.BOLD, 20));
-        password.setBounds(50, 130, 150, 30);
+        password.setBounds(40, 130, 120, 30);
         password.setForeground(Color.BLACK);
         add(password);
 
         // Password input field
         passwordField = new JPasswordField();
         passwordField.setFont(new Font("Raleway", Font.BOLD, 20));
-        passwordField.setBounds(200, 130, 200, 30);
+        passwordField.setBounds(180, 130, 200, 30);
         passwordField.setForeground(Color.BLACK);
         add(passwordField);
 
-        // Button to clear all entered input fields
+        // Button to clear all input fields
         clearBtn = new JButton("CLEAR");
         clearBtn.setFont(new Font("Raleway", Font.PLAIN, 15));
         clearBtn.setBackground(Color.BLACK);
         clearBtn.setForeground(Color.WHITE);
-        clearBtn.setBounds(75, 180, 150, 30);
+        clearBtn.setBounds(50, 190, 150, 30);
         add(clearBtn);
 
-        // Button to open signup/registration page
+        // Button to perform signup/registration operation
         signupBtn = new JButton("SIGN UP");
         signupBtn.setFont(new Font("Raleway", Font.PLAIN, 15));
         signupBtn.setBackground(Color.BLACK);
         signupBtn.setForeground(Color.WHITE);
-        signupBtn.setBounds(245, 180, 150, 30);
+        signupBtn.setBounds(210, 190, 150, 30);
         add(signupBtn);
 
-        // Button to perform login operation
-        loginBtn = new JButton("LOGIN");
-        loginBtn.setFont(new Font("Raleway", Font.PLAIN, 15));
-        loginBtn.setBackground(Color.BLACK);
-        loginBtn.setForeground(Color.WHITE);
-        loginBtn.setBounds(75, 220, 320, 30);
-        add(loginBtn);
-
-        // Makes the frame visible on screen
+        // Makes the frame visible
         setVisible(true);
+
     }
 
     /*
@@ -121,14 +113,6 @@ public class LoginFrame extends JFrame {
      */
     public JPasswordField getPasswordField() {
         return passwordField;
-    }
-
-    /*
-     * Getter method for Login button.
-     * Used by controller to attach ActionListener.
-     */
-    public JButton getLoginBtn() {
-        return loginBtn;
     }
 
     /*

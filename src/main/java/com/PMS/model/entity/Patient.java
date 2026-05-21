@@ -2,23 +2,40 @@ package com.PMS.model.entity;
 
 import jakarta.persistence.*;
 
-
+/*
+ * Patient Entity Class:
+ * Represents the Patient table in the database.
+ * Used by Hibernate/JPA for ORM mapping.
+ */
 @Entity
 public class Patient {
 
+    // Primary key of Patient table
     @Id
     private int id;
+
+    // Patient basic details
     private String name;
     private int age;
     private String city;
     private String gender;
+
+    // Physical information of patient
     private int height;
     private int weight;
 
+    /*
+     * Default constructor:
+     * Required by Hibernate/JPA.
+     */
     public Patient() {
         super();
     }
 
+    /*
+     * Parameterized constructor:
+     * Used to create and initialize Patient objects.
+     */
     public Patient(int id, String name, int age, String city, String gender, int height, int weight) {
         this.id = id;
         this.name = name;
@@ -28,6 +45,11 @@ public class Patient {
         this.height = height;
         this.weight = weight;
     }
+
+    /*
+     * Getter and Setter methods:
+     * Used to access and modify patient data.
+     */
 
     public int getId() {
         return id;
