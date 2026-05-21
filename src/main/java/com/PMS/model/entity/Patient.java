@@ -8,10 +8,12 @@ import jakarta.persistence.*;
  * Used by Hibernate/JPA for ORM mapping.
  */
 @Entity
+@Table(name = "patient")
 public class Patient {
 
     // Primary key of Patient table
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     // Patient basic details

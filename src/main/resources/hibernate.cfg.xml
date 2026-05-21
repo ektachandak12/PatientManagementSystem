@@ -41,8 +41,9 @@
         <property name="hibernate.format_sql">true</property>
 
 
-        <mapping class = "com.PMS.Main" />
-
+        <!-- Entity Mapping -->
+        <mapping class="com.PMS.model.entity.Patient"/>
+        <mapping class="com.PMS.model.entity.Doctor"/>
 
 
     </session-factory>
