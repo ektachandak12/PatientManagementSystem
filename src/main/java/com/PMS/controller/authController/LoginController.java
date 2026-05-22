@@ -1,8 +1,14 @@
 package com.PMS.controller.authController;
 
+import com.PMS.model.entity.Doctor;
+import com.PMS.model.util.FactoryProvider;
 import com.PMS.view.auth.LoginFrame;
 import com.PMS.view.auth.SignUpFrame;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -38,10 +44,128 @@ public class LoginController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         // Checks if Login button is clicked
-        if(e.getSource() == loginFrame.getLoginBtn()){
+        if (e.getSource() == loginFrame.getLoginBtn()) {
 
-            // Login authentication logic will be added here
+            // Get entered username and password from login form
+            String username = loginFrame.getUsernameField().getText().trim();
+            String password = String.valueOf(loginFrame.getPasswordField().getPassword());
 
+            // ---------------- VALIDATIONS ----------------
+
+            // Check if any field is empty
+            if (username.isEmpty() || password.isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        loginFrame,
+                        "Please enter all the fields!"
+                );
+                return;
+            }
+
+            // Username should not contain spaces
+            if (username.contains(" ")) {
+
+                JOptionPane.showMessageDialog(
+                        loginFrame,
+                        "Username should not contain spaces!"
+                );
+                return;
+            }
+
+            // Username length validation
+            if (username.length() > 8) {
+
+                JOptionPane.showMessageDialog(
+                        loginFrame,
+                        "Username length should be less than or equal to 8!"
+                );
+                return;
+            }
+
+            // Password must contain exactly 4 characters
+            if (password.length() != 4) {
+
+                JOptionPane.showMessageDialog(
+                        loginFrame,
+                        "Password must be exactly 4 digits!"
+                );
+                return;
+            }
+
+            // Password should contain only numeric digits
+            if (!password.matches("[0-9]+")) {
+
+                JOptionPane.showMessageDialog(
+                        loginFrame,
+                        "Password should contain only digits!"
+                );
+                return;
+            }
+
+            // ---------------- DATABASE CHECK ----------------
+
+            // Open Hibernate session for database operations
+            Session s = FactoryProvider.getFactory().openSession();
+
+            try {
+
+                /*
+                 * HQL Query:
+                 * Checks whether entered username and password
+                 * exist in Doctor table or not.
+                 */
+                Query<Doctor> query = s.createQuery(
+                        "FROM Doctor WHERE username = :username AND password = :password",
+                        Doctor.class
+                );
+
+                // Setting values in query parameters
+                query.setParameter("username", username);
+                query.setParameter("password", password);
+
+                // Fetch single matching doctor record
+                Doctor doctor = query.uniqueResult();
+
+                // If matching doctor found in database
+                if (doctor != null) {
+
+                    JOptionPane.showMessageDialog(
+                            loginFrame,
+                            "Login Successful!"
+                    );
+
+                    // Open dashboard or next screen here
+
+                }
+
+                // If username or password is incorrect
+                else {
+
+                    JOptionPane.showMessageDialog(
+                            loginFrame,
+                            "Invalid Username or Password!"
+                    );
+                }
+
+            }
+
+            // Handles unexpected exceptions
+            catch (Exception ex) {
+
+                ex.printStackTrace();
+
+                JOptionPane.showMessageDialog(
+                        loginFrame,
+                        "Something went wrong!"
+                );
+
+            }
+
+            // Always closes session after database operation
+            finally {
+
+                s.close();
+            }
         }
 
         // Checks if Signup button is clicked
