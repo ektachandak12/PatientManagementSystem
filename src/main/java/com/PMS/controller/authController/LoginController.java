@@ -4,6 +4,7 @@ import com.PMS.model.entity.Doctor;
 import com.PMS.model.util.FactoryProvider;
 import com.PMS.view.auth.LoginFrame;
 import com.PMS.view.auth.SignUpFrame;
+import com.PMS.view.dashboard.DashboardFrame;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -134,8 +135,13 @@ public class LoginController implements ActionListener {
                             "Login Successful!"
                     );
 
-                    // Open dashboard or next screen here
+                    // Open dashboard here
 
+                    loginFrame.dispose();
+
+                    DashboardFrame dashboardFrame = new DashboardFrame();
+
+                    dashboardFrame.setVisible(true);
                 }
 
                 // If username or password is incorrect

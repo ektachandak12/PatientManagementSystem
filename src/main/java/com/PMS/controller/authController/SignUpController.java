@@ -44,6 +44,61 @@ public class SignUpController implements ActionListener {
         // Checks if Signup button is clicked
         if(e.getSource() == signUpFrame.getSignupBtn()) {
 
+            // Get entered username and password from login form
+            String username = signUpFrame.getUsernameField().getText().trim();
+            String password = String.valueOf(signUpFrame.getPasswordField().getPassword());
+            // ---------------- VALIDATIONS ----------------
+
+            // Check if any field is empty
+            if (username.isEmpty() || password.isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        signUpFrame,
+                        "Please enter all the fields!"
+                );
+                return;
+            }
+
+            // Username should not contain spaces
+            if (username.contains(" ")) {
+
+                JOptionPane.showMessageDialog(
+                        signUpFrame,
+                        "Username should not contain spaces!"
+                );
+                return;
+            }
+
+            // Username length validation
+            if (username.length() > 8) {
+
+                JOptionPane.showMessageDialog(
+                        signUpFrame,
+                        "Username length should be less than or equal to 8!"
+                );
+                return;
+            }
+
+            // Password must contain exactly 4 characters
+            if (password.length() != 4) {
+
+                JOptionPane.showMessageDialog(
+                        signUpFrame,
+                        "Password must be exactly 4 digits!"
+                );
+                return;
+            }
+
+            // Password should contain only numeric digits
+            if (!password.matches("[0-9]+")) {
+
+                JOptionPane.showMessageDialog(
+                        signUpFrame,
+                        "Password should contain only digits!"
+                );
+                return;
+            }
+
             // Creating Doctor object to store signup details
             Doctor doctor = new Doctor();
 
