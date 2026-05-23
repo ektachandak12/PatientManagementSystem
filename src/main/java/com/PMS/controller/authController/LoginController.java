@@ -140,6 +140,7 @@ public class LoginController implements ActionListener {
                     loginFrame.dispose();
 
                     DashboardFrame dashboardFrame = new DashboardFrame();
+                    DashboardController dashboardController = new DashboardController(dashboardFrame);
 
                     dashboardFrame.setVisible(true);
                 }

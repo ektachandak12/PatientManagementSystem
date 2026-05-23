@@ -1,5 +1,8 @@
 package com.PMS.view.dashboard;
 
+import com.PMS.controller.authController.DashboardController;
+import com.PMS.view.dashboard.panels.*;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,6 +37,34 @@ public class DashboardFrame extends JFrame {
      */
     public DashboardFrame() {
         initialize();
+    }
+
+    public JButton getUpdatePatientBtn() {
+        return updatePatientBtn;
+    }
+
+    public JButton getAddPatientBtn() {
+        return addPatientBtn;
+    }
+
+    public JButton getSearchPatientBtn() {
+        return searchPatientBtn;
+    }
+
+    public JButton getViewPatientsBtn() {
+        return viewPatientsBtn;
+    }
+
+    public JButton getDeletePatientBtn() {
+        return deletePatientBtn;
+    }
+
+    public JButton getLogoutBtn() {
+        return logoutBtn;
+    }
+
+    public JPanel getContentPanel() {
+        return contentPanel;
     }
 
     /*
@@ -176,6 +207,23 @@ public class DashboardFrame extends JFrame {
 
         // Add content panel to center of frame
         add(contentPanel, BorderLayout.CENTER);
+
+        AddPatientPanel addPatientPanel = new AddPatientPanel();
+        contentPanel.add(addPatientPanel, "ADD_PATIENT");
+
+        UpdatePatientPanel updatePatientPanel = new UpdatePatientPanel();
+        contentPanel.add(updatePatientPanel, "UPDATE_PATIENT");
+
+        SearchPatientPanel searchPatientPanel = new SearchPatientPanel();
+        contentPanel.add(searchPatientPanel, "SEARCH_PATIENT");
+
+        ViewPatientPanel viewPatientPanel = new ViewPatientPanel();
+        contentPanel.add(viewPatientPanel, "VIEW_PATIENTS");
+
+        DeletePatientPanel deletePatientPanel = new DeletePatientPanel();
+        contentPanel.add(deletePatientPanel, "DELETE_PATIENT");
+
+
 
         // Makes dashboard visible
         setVisible(true);
