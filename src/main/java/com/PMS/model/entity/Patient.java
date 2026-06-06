@@ -38,8 +38,10 @@ public class Patient {
      * Parameterized constructor:
      * Used to create and initialize Patient objects.
      */
-    public Patient(int id, String name, int age, String city, String gender, int height, int weight) {
-        this.id = id;
+    public Patient(String name, int age,
+                   String city, String gender,
+                   int height, int weight) {
+
         this.name = name;
         this.age = age;
         this.city = city;
@@ -107,5 +109,18 @@ public class Patient {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", city='" + city + '\'' +
+                ", gender='" + gender + '\'' +
+                ", height=" + height +
+                ", weight=" + weight +
+                '}';
     }
 }

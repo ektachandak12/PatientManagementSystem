@@ -178,4 +178,44 @@ public class AddPatientPanel extends JPanel {
         saveBtn.setBounds(290, 395, 130, 40);
         add(saveBtn);
     }
+
+    public JTextField getNameTextField() {
+        return nameTextField;
+    }
+
+    public JTextField getAgeTextField() {
+        return ageTextField;
+    }
+
+    public JTextField getCityTextField() {
+        return cityTextField;
+    }
+
+    public JTextField getHeightTextField() {
+        return heightTextField;
+    }
+
+    public JTextField getWeightTextField() {
+        return weightTextField;
+    }
+
+    public JRadioButton getFemale() {
+        return female;
+    }
+
+    public JRadioButton getMale() {
+        return male;
+    }
+
+    public JRadioButton getOther() {
+        return other;
+    }
+
+    public JButton getSaveBtn() {
+        return saveBtn;
+    }
+
+    public JButton getBackBtn() {
+        return backBtn;
+    }
 }

@@ -1,13 +1,11 @@
 package com.PMS.controller.authController;
 
+import com.PMS.DAO.DoctorDAO;
 import com.PMS.model.entity.Doctor;
-import com.PMS.model.util.FactoryProvider;
 import com.PMS.view.auth.LoginFrame;
 import com.PMS.view.auth.SignUpFrame;
 import com.PMS.view.dashboard.DashboardFrame;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -105,29 +103,12 @@ public class LoginController implements ActionListener {
 
             // ---------------- DATABASE CHECK ----------------
 
-            // Open Hibernate session for database operations
-            Session s = FactoryProvider.getFactory().openSession();
-
             try {
 
-                /*
-                 * HQL Query:
-                 * Checks whether entered username and password
-                 * exist in Doctor table or not.
-                 */
-                Query<Doctor> query = s.createQuery(
-                        "FROM Doctor WHERE username = :username AND password = :password",
-                        Doctor.class
-                );
+                DoctorDAO doctorDAO = new DoctorDAO();
 
-                // Setting values in query parameters
-                query.setParameter("username", username);
-                query.setParameter("password", password);
+                Doctor doctor = doctorDAO.loginDoctor(username, password);
 
-                // Fetch single matching doctor record
-                Doctor doctor = query.uniqueResult();
-
-                // If matching doctor found in database
                 if (doctor != null) {
 
                     JOptionPane.showMessageDialog(
@@ -135,18 +116,15 @@ public class LoginController implements ActionListener {
                             "Login Successful!"
                     );
 
-                    // Open dashboard here
-
                     loginFrame.dispose();
 
                     DashboardFrame dashboardFrame = new DashboardFrame();
-                    DashboardController dashboardController = new DashboardController(dashboardFrame);
+
+                    new DashboardController(dashboardFrame);
 
                     dashboardFrame.setVisible(true);
-                }
 
-                // If username or password is incorrect
-                else {
+                } else {
 
                     JOptionPane.showMessageDialog(
                             loginFrame,
@@ -154,10 +132,7 @@ public class LoginController implements ActionListener {
                     );
                 }
 
-            }
-
-            // Handles unexpected exceptions
-            catch (Exception ex) {
+            } catch (Exception ex) {
 
                 ex.printStackTrace();
 
@@ -165,14 +140,8 @@ public class LoginController implements ActionListener {
                         loginFrame,
                         "Something went wrong!"
                 );
-
             }
 
-            // Always closes session after database operation
-            finally {
-
-                s.close();
-            }
         }
 
         // Checks if Signup button is clicked

@@ -1,11 +1,9 @@
 package com.PMS.controller.authController;
 
+import com.PMS.DAO.DoctorDAO;
 import com.PMS.model.entity.Doctor;
-import com.PMS.model.util.FactoryProvider;
 import com.PMS.view.auth.LoginFrame;
 import com.PMS.view.auth.SignUpFrame;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -102,26 +100,19 @@ public class SignUpController implements ActionListener {
             // Creating Doctor object to store signup details
             Doctor doctor = new Doctor();
 
-            // Opening Hibernate session
-            Session s = FactoryProvider.getFactory().openSession();
+            doctor.setUsername(
+                    signUpFrame.getUsernameField().getText()
+            );
 
-            // Starting transaction for database operation
-            Transaction tx = s.beginTransaction();
+            doctor.setPassword(
+                    String.valueOf(
+                            signUpFrame.getPasswordField().getPassword()
+                    )
+            );
 
-            // Setting entered username into Doctor object
-            doctor.setUsername((signUpFrame.getUsernameField()).getText());
+            DoctorDAO doctorDAO = new DoctorDAO();
 
-            // Setting entered password into Doctor object
-            doctor.setPassword(String.valueOf(signUpFrame.getPasswordField().getPassword()));
-
-            // Saving Doctor object into database
-            s.save(doctor);
-
-            // Permanently saves changes into database
-            tx.commit();
-
-            // Closing Hibernate session
-            s.close();
+            doctorDAO.saveDoctor(doctor);
 
             // Displays success message
             JOptionPane.showMessageDialog(null, "Sign up Successful");
