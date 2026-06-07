@@ -1,6 +1,7 @@
 package com.PMS.view.dashboard;
 
 import com.PMS.controller.panelController.AddPatientController;
+import com.PMS.controller.panelController.DeletePatientController;
 import com.PMS.controller.panelController.SearchPatientController;
 import com.PMS.view.dashboard.panels.*;
 
@@ -230,7 +231,9 @@ public class DashboardFrame extends JFrame {
         contentPanel.add(viewPatientPanel, "VIEW_PATIENTS");
 
         deletePatientPanel = new DeletePatientPanel();
+        new DeletePatientController(this, deletePatientPanel);
         contentPanel.add(deletePatientPanel, "DELETE_PATIENT");
+
 
         // Makes dashboard visible
         setVisible(true);

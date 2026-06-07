@@ -39,10 +39,10 @@ public class PatientDAO {
 
     }
 
-    public void getPatientByID(){
-
+    public void viewAllPatients(){
 
     }
+
     public Patient searchPatient(int searchID){
         Session s = FactoryProvider.getFactory().openSession();
 
@@ -61,7 +61,24 @@ public class PatientDAO {
 
     }
 
-    public void deletePatient(){
+    public int deletePatient(int deleteID) {
 
+        Session s = FactoryProvider.getFactory().openSession();
+
+        Transaction tx = s.beginTransaction();
+
+        Query query = s.createQuery(
+                "DELETE FROM Patient WHERE id = :deleteID"
+        );
+
+        query.setParameter("deleteID", deleteID);
+
+        int rowsAffected = query.executeUpdate();
+
+        tx.commit();
+
+        s.close();
+
+        return rowsAffected;
     }
 }

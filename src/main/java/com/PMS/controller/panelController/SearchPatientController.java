@@ -129,6 +129,18 @@ public class SearchPatientController  implements ActionListener{
                 );
             }
 
+            // ================= CLEAR FIELDS =================
+            // Reset form after successful save
+
+            searchPatientPanel.getIdTextField().setText("");
+            searchPatientPanel.getNameTextField().setText("");
+            searchPatientPanel.getAgeTextField().setText("");
+            searchPatientPanel.getGenderTextField().setText("");
+            searchPatientPanel.getCityTextField().setText("");
+            searchPatientPanel.getHeightTextField().setText("");
+            searchPatientPanel.getWeightTextField().setText("");
+            searchPatientPanel.getBmiTextField().setText("");
+            searchPatientPanel.getBmiCategoryTextField().setText("");
         }
     }
 }
