@@ -49,7 +49,7 @@ public class SearchPatientController  implements ActionListener{
             searchPatientPanel.getWeightTextField().setText("");
             searchPatientPanel.getBmiTextField().setText("");
             searchPatientPanel.getBmiCategoryTextField().setText("");
-            
+
 
             // Get CardLayout used by the dashboard content panel
             CardLayout c1 = (CardLayout) dashboardFrame.getContentPanel().getLayout();
