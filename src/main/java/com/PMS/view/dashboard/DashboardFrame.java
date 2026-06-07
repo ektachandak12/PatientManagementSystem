@@ -1,6 +1,7 @@
 package com.PMS.view.dashboard;
 
 import com.PMS.controller.panelController.AddPatientController;
+import com.PMS.controller.panelController.SearchPatientController;
 import com.PMS.view.dashboard.panels.*;
 
 import javax.swing.*;
@@ -223,6 +224,7 @@ public class DashboardFrame extends JFrame {
 
         searchPatientPanel = new SearchPatientPanel();
         contentPanel.add(searchPatientPanel, "SEARCH_PATIENT");
+        new SearchPatientController(this, searchPatientPanel);
 
         viewPatientPanel = new ViewPatientPanel();
         contentPanel.add(viewPatientPanel, "VIEW_PATIENTS");

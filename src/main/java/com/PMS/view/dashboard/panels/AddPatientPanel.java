@@ -3,31 +3,45 @@ package com.PMS.view.dashboard.panels;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+ * AddPatientPanel:
+ * Provides the user interface for entering new patient details.
+ * Contains input fields for patient information and buttons
+ * for saving the record or returning to the previous screen.
+ */
 public class AddPatientPanel extends JPanel {
 
+    // Labels used to identify input fields
     JLabel heading, name, age, gender, city, height, weight;
 
+    // Text fields for entering patient details
     JTextField nameTextField;
     JTextField ageTextField;
     JTextField cityTextField;
     JTextField heightTextField;
     JTextField weightTextField;
 
+    // Radio buttons for gender selection
     JRadioButton male, female, other;
 
+    // Buttons for saving data and navigating back
     JButton saveBtn, backBtn;
 
     public AddPatientPanel() {
 
+        // Initialize and arrange all UI components
         initialize();
     }
 
+    /*
+     * Creates and arranges all components of the Add Patient form.
+     */
     private void initialize() {
 
         // Using null layout for custom positioning
         setLayout(null);
 
-        // Background color
+        // Set panel background color
         setBackground(Color.WHITE);
 
         /*
@@ -38,6 +52,7 @@ public class AddPatientPanel extends JPanel {
          */
 
         // ================= HEADING =================
+        // Main title of the panel
 
         heading = new JLabel("Add Patient Details");
         heading.setFont(new Font("Times New Roman", Font.BOLD, 30));
@@ -47,6 +62,7 @@ public class AddPatientPanel extends JPanel {
         add(heading);
 
         // ================= COMMON VARIABLES =================
+        // Common positioning and styling values used throughout the form
 
         int labelX = 60;
         int textFieldX = 240;
@@ -60,6 +76,7 @@ public class AddPatientPanel extends JPanel {
         Font textFieldFont = new Font("Arial", Font.PLAIN, 16);
 
         // ================= NAME =================
+        // Input field for patient's name
 
         name = new JLabel("Name:");
         name.setBounds(labelX, y, labelWidth, componentHeight);
@@ -72,6 +89,7 @@ public class AddPatientPanel extends JPanel {
         add(nameTextField);
 
         // ================= AGE =================
+        // Input field for patient's age
 
         y += verticalGap;
 
@@ -86,6 +104,7 @@ public class AddPatientPanel extends JPanel {
         add(ageTextField);
 
         // ================= GENDER =================
+        // Gender selection using radio buttons
 
         y += verticalGap;
 
@@ -109,7 +128,7 @@ public class AddPatientPanel extends JPanel {
         other.setBackground(Color.WHITE);
         other.setFont(new Font("Arial", Font.PLAIN, 15));
 
-        // Group radio buttons
+        // Group radio buttons so only one option can be selected
         ButtonGroup bg = new ButtonGroup();
 
         bg.add(male);
@@ -121,6 +140,7 @@ public class AddPatientPanel extends JPanel {
         add(other);
 
         // ================= CITY =================
+        // Input field for patient's city
 
         y += verticalGap;
 
@@ -135,10 +155,11 @@ public class AddPatientPanel extends JPanel {
         add(cityTextField);
 
         // ================= HEIGHT =================
+        // Input field for patient's height in metres
 
         y += verticalGap;
 
-        height = new JLabel("Height (in cm):");
+        height = new JLabel("Height (in m):");
         height.setBounds(labelX, y, labelWidth, componentHeight);
         height.setFont(labelFont);
         add(height);
@@ -149,6 +170,7 @@ public class AddPatientPanel extends JPanel {
         add(heightTextField);
 
         // ================= WEIGHT =================
+        // Input field for patient's weight in kilograms
 
         y += verticalGap;
 
@@ -165,6 +187,7 @@ public class AddPatientPanel extends JPanel {
         // ================= BUTTONS =================
 
         // Back Button (Left Side)
+        // Returns user to the previous screen
 
         backBtn = new JButton("Back");
         backBtn.setFont(new Font("Arial", Font.BOLD, 18));
@@ -172,6 +195,7 @@ public class AddPatientPanel extends JPanel {
         add(backBtn);
 
         // Save Button (Right Side)
+        // Saves patient details after validation
 
         saveBtn = new JButton("Save");
         saveBtn.setFont(new Font("Arial", Font.BOLD, 18));
@@ -179,42 +203,52 @@ public class AddPatientPanel extends JPanel {
         add(saveBtn);
     }
 
+    // Returns name input field
     public JTextField getNameTextField() {
         return nameTextField;
     }
 
+    // Returns age input field
     public JTextField getAgeTextField() {
         return ageTextField;
     }
 
+    // Returns city input field
     public JTextField getCityTextField() {
         return cityTextField;
     }
 
+    // Returns height input field
     public JTextField getHeightTextField() {
         return heightTextField;
     }
 
+    // Returns weight input field
     public JTextField getWeightTextField() {
         return weightTextField;
     }
 
+    // Returns female radio button
     public JRadioButton getFemale() {
         return female;
     }
 
+    // Returns male radio button
     public JRadioButton getMale() {
         return male;
     }
 
+    // Returns other gender radio button
     public JRadioButton getOther() {
         return other;
     }
 
+    // Returns Save button
     public JButton getSaveBtn() {
         return saveBtn;
     }
 
+    // Returns Back button
     public JButton getBackBtn() {
         return backBtn;
     }

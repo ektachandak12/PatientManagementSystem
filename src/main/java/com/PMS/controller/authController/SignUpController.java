@@ -11,41 +11,31 @@ import java.awt.event.ActionListener;
 
 /*
  * SignUpController:
- * Handles all button actions of the SignUpFrame.
- * Implements ActionListener to listen for button click events.
+ * Handles signup form actions like signup and clear button clicks.
  */
 public class SignUpController implements ActionListener {
 
-    // Reference of SignUpFrame to access UI components
+    // Reference to the signup screen
     SignUpFrame signUpFrame;
 
-    /*
-     * Constructor:
-     * Connects the controller with SignUpFrame
-     * and registers action listeners on buttons.
-     */
+    // Connect controller with SignUpFrame and register button listeners
     public SignUpController(SignUpFrame signUpFrame) {
         this.signUpFrame = signUpFrame;
 
-        // Registering controller as listener for buttons
         signUpFrame.getClearBtn().addActionListener(this);
         signUpFrame.getSignupBtn().addActionListener(this);
     }
 
-    /*
-     * actionPerformed():
-     * Automatically called whenever any registered button is clicked.
-     */
+    // Executes when any registered button is clicked
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // Checks if Signup button is clicked
+        // Signup button clicked
         if(e.getSource() == signUpFrame.getSignupBtn()) {
 
-            // Get entered username and password from login form
+            // Read username and password entered by user
             String username = signUpFrame.getUsernameField().getText().trim();
             String password = String.valueOf(signUpFrame.getPasswordField().getPassword());
-            // ---------------- VALIDATIONS ----------------
 
             // Check if any field is empty
             if (username.isEmpty() || password.isEmpty()) {
@@ -67,7 +57,7 @@ public class SignUpController implements ActionListener {
                 return;
             }
 
-            // Username length validation
+            // Username can have maximum 8 characters
             if (username.length() > 8) {
 
                 JOptionPane.showMessageDialog(
@@ -77,7 +67,7 @@ public class SignUpController implements ActionListener {
                 return;
             }
 
-            // Password must contain exactly 4 characters
+            // Password must contain exactly 4 digits
             if (password.length() != 4) {
 
                 JOptionPane.showMessageDialog(
@@ -87,7 +77,7 @@ public class SignUpController implements ActionListener {
                 return;
             }
 
-            // Password should contain only numeric digits
+            // Allow only numeric digits in password
             if (!password.matches("[0-9]+")) {
 
                 JOptionPane.showMessageDialog(
@@ -97,7 +87,7 @@ public class SignUpController implements ActionListener {
                 return;
             }
 
-            // Creating Doctor object to store signup details
+            // Create Doctor object and store signup details
             Doctor doctor = new Doctor();
 
             doctor.setUsername(
@@ -110,30 +100,29 @@ public class SignUpController implements ActionListener {
                     )
             );
 
+            // Save doctor details in database
             DoctorDAO doctorDAO = new DoctorDAO();
-
             doctorDAO.saveDoctor(doctor);
 
-            // Displays success message
+            // Show success message
             JOptionPane.showMessageDialog(null, "Sign up Successful");
 
-            // Closes current signup window
+            // Close signup window
             signUpFrame.dispose();
 
-            // Opens LoginFrame after successful signup
+            // Open login screen
             LoginFrame loginFrame = new LoginFrame();
 
-            // Connects LoginFrame with its controller
+            // Attach controller to login screen
             new LoginController(loginFrame);
 
-            // Displays login window
             loginFrame.setVisible(true);
         }
 
-        // Checks if Clear button is clicked
+        // Clear button clicked
         else if(e.getSource() == signUpFrame.getClearBtn()){
 
-            // Clears username and password input fields
+            // Clear all input fields
             signUpFrame.getUsernameField().setText("");
             signUpFrame.getPasswordField().setText("");
         }

@@ -6,15 +6,15 @@ import com.PMS.view.auth.LoginFrame;
 import com.PMS.view.auth.SignUpFrame;
 import com.PMS.view.dashboard.DashboardFrame;
 
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /*
  * LoginController:
- * Handles all button actions of the LoginFrame.
- * Implements ActionListener to listen for button click events.
+ * Acts as the controller for the LoginFrame.
+ * Handles user interactions such as Login, Signup navigation,
+ * and clearing input fields.
  */
 public class LoginController implements ActionListener {
 
@@ -38,6 +38,8 @@ public class LoginController implements ActionListener {
     /*
      * actionPerformed():
      * Automatically called whenever any registered button is clicked.
+     * Determines which button triggered the event and performs
+     * the corresponding action.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -72,6 +74,7 @@ public class LoginController implements ActionListener {
             }
 
             // Username length validation
+            // Restricts username to a maximum of 8 characters
             if (username.length() > 8) {
 
                 JOptionPane.showMessageDialog(
@@ -102,13 +105,17 @@ public class LoginController implements ActionListener {
             }
 
             // ---------------- DATABASE CHECK ----------------
+            // After successful validation, verify credentials from database
 
             try {
 
+                // Create DAO object to interact with doctor table
                 DoctorDAO doctorDAO = new DoctorDAO();
 
+                // Check whether entered username and password exist in database
                 Doctor doctor = doctorDAO.loginDoctor(username, password);
 
+                // Login successful if a matching doctor record is found
                 if (doctor != null) {
 
                     JOptionPane.showMessageDialog(
@@ -116,16 +123,21 @@ public class LoginController implements ActionListener {
                             "Login Successful!"
                     );
 
+                    // Close login window after successful authentication
                     loginFrame.dispose();
 
+                    // Open dashboard screen
                     DashboardFrame dashboardFrame = new DashboardFrame();
 
+                    // Attach controller to dashboard
                     new DashboardController(dashboardFrame);
 
+                    // Make dashboard visible to user
                     dashboardFrame.setVisible(true);
 
                 } else {
 
+                    // Display error if credentials do not match any record
                     JOptionPane.showMessageDialog(
                             loginFrame,
                             "Invalid Username or Password!"
@@ -134,8 +146,10 @@ public class LoginController implements ActionListener {
 
             } catch (Exception ex) {
 
+                // Print detailed error in console for debugging
                 ex.printStackTrace();
 
+                // Display generic error message to user
                 JOptionPane.showMessageDialog(
                         loginFrame,
                         "Something went wrong!"
@@ -147,16 +161,16 @@ public class LoginController implements ActionListener {
         // Checks if Signup button is clicked
         else if(e.getSource() == loginFrame.getSignupBtn()){
 
-            // Closes current login window
+            // Close login screen before opening signup screen
             loginFrame.dispose();
 
-            // Creates Signup window
+            // Create Signup window
             SignUpFrame signUpFrame = new SignUpFrame();
 
-            // Connects Signup window with its controller
+            // Connect Signup window with its controller
             new SignUpController(signUpFrame);
 
-            // Displays Signup window
+            // Display Signup window
             signUpFrame.setVisible(true);
 
         }
@@ -164,8 +178,10 @@ public class LoginController implements ActionListener {
         // Checks if Clear button is clicked
         else if(e.getSource() == loginFrame.getClearBtn()){
 
-            // Clears username and password input fields
+            // Reset username field
             loginFrame.getUsernameField().setText("");
+
+            // Reset password field
             loginFrame.getPasswordField().setText("");
         }
     }
