@@ -1,6 +1,7 @@
 package com.PMS.controller.authController;
 
 import com.PMS.DAO.DoctorDAO;
+import com.PMS.controller.DashboardController.DashboardController;
 import com.PMS.model.entity.Doctor;
 import com.PMS.view.auth.LoginFrame;
 import com.PMS.view.auth.SignUpFrame;

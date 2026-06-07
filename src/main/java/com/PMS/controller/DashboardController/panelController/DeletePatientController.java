@@ -1,4 +1,4 @@
-package com.PMS.controller.panelController;
+package com.PMS.controller.DashboardController.panelController;
 
 import com.PMS.DAO.PatientDAO;;
 import com.PMS.view.dashboard.DashboardFrame;

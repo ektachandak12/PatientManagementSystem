@@ -1,6 +1,6 @@
-package com.PMS.controller.authController;
+package com.PMS.controller.DashboardController;
 
-import com.PMS.controller.panelController.AddPatientController;
+import com.PMS.controller.authController.LoginController;
 import com.PMS.view.auth.LoginFrame;
 import com.PMS.view.dashboard.DashboardFrame;
 import com.PMS.view.dashboard.panels.AddPatientPanel;
@@ -20,7 +20,7 @@ public class DashboardController implements ActionListener {
         dashboardFrame.getAddPatientBtn().addActionListener(this);
         dashboardFrame.getDeletePatientBtn().addActionListener(this);
         dashboardFrame.getUpdatePatientBtn().addActionListener(this);
-        dashboardFrame.getViewPatientsBtn().addActionListener(this);
+        dashboardFrame.getViewAllPatientsBtn().addActionListener(this);
         dashboardFrame.getSearchPatientBtn().addActionListener(this);
         dashboardFrame.getLogoutBtn().addActionListener(this);
 
@@ -56,7 +56,7 @@ public class DashboardController implements ActionListener {
             dashboardFrame.getContentPanel().repaint();
 
 
-        }else if(e.getSource() == dashboardFrame.getViewPatientsBtn()) {
+        }else if(e.getSource() == dashboardFrame.getViewAllPatientsBtn()) {
 
             CardLayout view = (CardLayout) dashboardFrame.getContentPanel().getLayout();
             view.show(dashboardFrame.getContentPanel(), "VIEW_PATIENTS");

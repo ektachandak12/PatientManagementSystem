@@ -1,8 +1,9 @@
 package com.PMS.view.dashboard;
 
-import com.PMS.controller.panelController.AddPatientController;
-import com.PMS.controller.panelController.DeletePatientController;
-import com.PMS.controller.panelController.SearchPatientController;
+import com.PMS.controller.DashboardController.panelController.AddPatientController;
+import com.PMS.controller.DashboardController.panelController.DeletePatientController;
+import com.PMS.controller.DashboardController.panelController.SearchPatientController;
+import com.PMS.controller.DashboardController.panelController.ViewAllPatientsController;
 import com.PMS.view.dashboard.panels.*;
 
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class DashboardFrame extends JFrame {
     JButton addPatientBtn;
     JButton updatePatientBtn;
     JButton searchPatientBtn;
-    JButton viewPatientsBtn;
+    JButton viewAllPatientsBtn;
     JButton deletePatientBtn;
     JButton logoutBtn;
 
@@ -53,8 +54,8 @@ public class DashboardFrame extends JFrame {
         return searchPatientBtn;
     }
 
-    public JButton getViewPatientsBtn() {
-        return viewPatientsBtn;
+    public JButton getViewAllPatientsBtn() {
+        return viewAllPatientsBtn;
     }
 
     public JButton getDeletePatientBtn() {
@@ -103,7 +104,7 @@ public class DashboardFrame extends JFrame {
         addPatientBtn = new JButton("Add Patient");
         updatePatientBtn = new JButton("Update Patient");
         searchPatientBtn = new JButton("Search Patient");
-        viewPatientsBtn = new JButton("View Patients");
+        viewAllPatientsBtn = new JButton("View All Patients");
         deletePatientBtn = new JButton("Delete Patient");
         logoutBtn = new JButton("Logout");
 
@@ -111,7 +112,7 @@ public class DashboardFrame extends JFrame {
         sidebarPanel.add(addPatientBtn);
         sidebarPanel.add(updatePatientBtn);
         sidebarPanel.add(searchPatientBtn);
-        sidebarPanel.add(viewPatientsBtn);
+        sidebarPanel.add(viewAllPatientsBtn);
         sidebarPanel.add(deletePatientBtn);
         sidebarPanel.add(logoutBtn);
 
@@ -121,7 +122,7 @@ public class DashboardFrame extends JFrame {
         AddPatientPanel addPatientPanel;
         UpdatePatientPanel updatePatientPanel;
         SearchPatientPanel searchPatientPanel;
-        ViewPatientPanel viewPatientPanel;
+        ViewAllPatientsPanel viewAllPatientsPanel;
         DeletePatientPanel deletePatientPanel;
 
         // ================= CONTENT PANEL =================
@@ -133,6 +134,8 @@ public class DashboardFrame extends JFrame {
          * Allows switching between multiple panels dynamically.
          */
         contentPanel.setLayout(new CardLayout());
+
+
 
         // ================= WELCOME PANEL =================
 
@@ -227,8 +230,9 @@ public class DashboardFrame extends JFrame {
         contentPanel.add(searchPatientPanel, "SEARCH_PATIENT");
         new SearchPatientController(this, searchPatientPanel);
 
-        viewPatientPanel = new ViewPatientPanel();
-        contentPanel.add(viewPatientPanel, "VIEW_PATIENTS");
+        viewAllPatientsPanel = new ViewAllPatientsPanel();
+        new ViewAllPatientsController(this, viewAllPatientsPanel);
+        contentPanel.add(viewAllPatientsPanel, "VIEW_PATIENTS");
 
         deletePatientPanel = new DeletePatientPanel();
         new DeletePatientController(this, deletePatientPanel);

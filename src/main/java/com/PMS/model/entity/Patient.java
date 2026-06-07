@@ -73,6 +73,11 @@ public class Patient {
      * Used to read and update patient information.
      */
 
+    // Returns patient's id
+    public int getId() {
+        return id;
+    }
+
     // Returns patient's name
     public String getName() {
         return name;

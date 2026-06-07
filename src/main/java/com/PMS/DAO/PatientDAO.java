@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 public class PatientDAO {
     public void addPatient(Patient patient) {
 
@@ -39,8 +41,21 @@ public class PatientDAO {
 
     }
 
-    public void viewAllPatients(){
+    public List<Patient> getAllPatients() {
 
+        Session s = FactoryProvider.getFactory().openSession();
+
+        try {
+
+            Query<Patient> query =
+                    s.createQuery("FROM Patient", Patient.class);
+
+            return query.list();
+
+        } finally {
+
+            s.close();
+        }
     }
 
     public Patient searchPatient(int searchID){
@@ -64,21 +79,36 @@ public class PatientDAO {
     public int deletePatient(int deleteID) {
 
         Session s = FactoryProvider.getFactory().openSession();
+        Transaction tx = null;
 
-        Transaction tx = s.beginTransaction();
+        try {
 
-        Query query = s.createQuery(
-                "DELETE FROM Patient WHERE id = :deleteID"
-        );
+            tx = s.beginTransaction();
 
-        query.setParameter("deleteID", deleteID);
+            Query<?> query = s.createQuery(
+                    "DELETE FROM Patient WHERE id = :deleteID"
+            );
 
-        int rowsAffected = query.executeUpdate();
+            query.setParameter("deleteID", deleteID);
 
-        tx.commit();
+            int rowsAffected = query.executeUpdate();
 
-        s.close();
+            tx.commit();
 
-        return rowsAffected;
+            return rowsAffected;
+
+        } catch (Exception e) {
+
+            if(tx != null) {
+                tx.rollback();
+            }
+
+            e.printStackTrace();
+            return 0;
+
+        } finally {
+
+            s.close();
+        }
     }
 }

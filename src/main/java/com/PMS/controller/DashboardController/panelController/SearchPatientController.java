@@ -1,4 +1,4 @@
-package com.PMS.controller.panelController;
+package com.PMS.controller.DashboardController.panelController;
 
 import com.PMS.DAO.PatientDAO;
 import com.PMS.model.entity.Patient;
@@ -40,6 +40,17 @@ public class SearchPatientController  implements ActionListener{
         // Handles Back button click
         if(e.getSource() == searchPatientPanel.getBackBtn()){
 
+            searchPatientPanel.getIdTextField().setText("");
+            searchPatientPanel.getNameTextField().setText("");
+            searchPatientPanel.getAgeTextField().setText("");
+            searchPatientPanel.getGenderTextField().setText("");
+            searchPatientPanel.getCityTextField().setText("");
+            searchPatientPanel.getHeightTextField().setText("");
+            searchPatientPanel.getWeightTextField().setText("");
+            searchPatientPanel.getBmiTextField().setText("");
+            searchPatientPanel.getBmiCategoryTextField().setText("");
+            
+
             // Get CardLayout used by the dashboard content panel
             CardLayout c1 = (CardLayout) dashboardFrame.getContentPanel().getLayout();
 
@@ -62,6 +73,8 @@ public class SearchPatientController  implements ActionListener{
 
                 // Search patient using entered ID
                 Patient patient = patientDAO.searchPatient(searchId);
+
+                System.out.println(patient);
 
                 try {
 
@@ -107,6 +120,9 @@ public class SearchPatientController  implements ActionListener{
                                 searchPatientPanel,
                                 "Patient not found"
                         );
+
+
+                        return;
                     }
                 } catch (Exception ex) {
 
@@ -129,18 +145,6 @@ public class SearchPatientController  implements ActionListener{
                 );
             }
 
-            // ================= CLEAR FIELDS =================
-            // Reset form after successful save
-
-            searchPatientPanel.getIdTextField().setText("");
-            searchPatientPanel.getNameTextField().setText("");
-            searchPatientPanel.getAgeTextField().setText("");
-            searchPatientPanel.getGenderTextField().setText("");
-            searchPatientPanel.getCityTextField().setText("");
-            searchPatientPanel.getHeightTextField().setText("");
-            searchPatientPanel.getWeightTextField().setText("");
-            searchPatientPanel.getBmiTextField().setText("");
-            searchPatientPanel.getBmiCategoryTextField().setText("");
         }
     }
 }
