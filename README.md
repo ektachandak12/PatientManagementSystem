@@ -177,28 +177,28 @@ Hibernate auto-generates the schema using `hbm2ddl.auto=update`. The two core ta
 ### Dashboard — Main Navigation
 The central hub for all patient management operations.
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](Screenshots/dashboard.png)
 
 ---
 
 ### Add Patient
 Enter patient details; BMI and category are calculated and stored automatically.
 
-![Add Patient](screenshots/add_patient.png)
+![Add Patient](Screenshots/add_patient.png)
 
 ---
 
 ### View All Patients
 Browse all registered patients in a scrollable table showing ID, Name, Age, and Gender.
 
-![View All Patients](screenshots/view_all_patients.png)
+![View All Patients](Screenshots/view_all_patients.png)
 
 ---
 
 ### Search Patient by ID
 Look up a specific patient's full record — including BMI and health category — by their unique ID.
 
-![Search Patient](screenshots/search_patient.png)
+![Search Patient](Screenshots/search_patient.png)
 
 ---
 
@@ -214,7 +214,7 @@ Look up a specific patient's full record — including BMI and health category �
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/PatientManagementSystem.git
+git clone https://github.com/ektachandak12/PatientManagementSystem.git
 cd PatientManagementSystem
 ```
 
@@ -297,11 +297,10 @@ On the Login screen, click **Sign Up** to create a doctor account, then log in w
 
 ## 👩‍💻 Author
 
-**Ekta**
-Java Developer Intern — Codtech IT Solutions
+**Ekta Naresh Chandak**
 
-[![GitHub](https://img.shields.io/badge/GitHub-your--username-181717?style=flat&logo=github)](https://github.com/your-username)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/your-profile)
+[![GitHub](https://img.shields.io/badge/GitHub-ektachandak12-181717?style=flat&logo=github)](https://github.com/ektachandak12)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/ekta-chandak-bb43192b5/)
 
 ---
 
