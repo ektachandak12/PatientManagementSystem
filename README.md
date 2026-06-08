@@ -99,6 +99,12 @@ Main.java
 ```
 PatientManagementSystem/
 ├── pom.xml
+├── .gitignore
+├── Screenshots/
+│   ├── dashboard.png
+│   ├── add_patient.png
+│   ├── view_all_patients.png
+│   └── search_patient.png
 └── src/
     └── main/
         ├── java/com/PMS/
@@ -137,11 +143,11 @@ PatientManagementSystem/
         │               ├── SearchPatientPanel.java
         │               └── ViewAllPatientsPanel.java
         └── resources/
-            ├── hibernate.cfg.xml                       # Database & Hibernate config
+            ├── hibernate.cfg.xml                       # Local only — gitignored
+            ├── hibernate.cfg.xml.template              # Safe template for contributors
             └── icons/
                 └── hospital.png
 ```
-
 ---
 
 ## 🗄️ Database Schema
@@ -230,7 +236,13 @@ CREATE DATABASE patientManagementSystem;
 
 ### 3. Configure Database Credentials
 
-Edit `src/main/resources/hibernate.cfg.xml` and update the connection properties to match your MySQL setup:
+Copy the template file and fill in your own credentials:
+
+```bash
+cp src/main/resources/hibernate.cfg.xml.template src/main/resources/hibernate.cfg.xml
+```
+
+Then open `hibernate.cfg.xml` and update:
 
 ```xml
 <property name="hibernate.connection.url">
@@ -239,6 +251,8 @@ Edit `src/main/resources/hibernate.cfg.xml` and update the connection properties
 <property name="hibernate.connection.username">your_username</property>
 <property name="hibernate.connection.password">your_password</property>
 ```
+
+> `hibernate.cfg.xml` is gitignored and will never be pushed to GitHub.
 
 ### 4. Build the Project
 
