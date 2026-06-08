@@ -73,6 +73,10 @@ public class Patient {
      * Used to read and update patient information.
      */
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     // Returns patient's id
     public int getId() {
         return id;
@@ -154,7 +158,7 @@ public class Patient {
     }
 
     // Sets patient's BMI category
-    public void setCategory(String bmiCategory){
+    public void setBmiCategory(String bmiCategory){
         this.bmiCategory = bmiCategory;
     }
 

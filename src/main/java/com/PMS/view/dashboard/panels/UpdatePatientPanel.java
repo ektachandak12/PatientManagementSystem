@@ -11,7 +11,7 @@ public class UpdatePatientPanel extends JPanel {
     JTextField idTextField;
 
     // Buttons for searching patient and returning to previous screen
-    JButton searchBtn, saveBtn, backBtn;
+    JButton searchBtn, updateBtn, backBtn;
 
     // Text fields used to display retrieved patient details
     JTextField nameTextField;
@@ -41,7 +41,7 @@ public class UpdatePatientPanel extends JPanel {
         // Main heading of the panel
         heading = new JLabel("Update Patient Record");
         heading.setFont(new Font("Times New Roman", Font.BOLD, 30));
-        heading.setBounds(110, 12, 320, 40);
+        heading.setBounds(110, 20, 320, 40);
         heading.setForeground(Color.BLACK);
         heading.setHorizontalAlignment(SwingConstants.CENTER);
         add(heading);
@@ -52,8 +52,8 @@ public class UpdatePatientPanel extends JPanel {
         int labelWidth = 160;
         int textFieldWidth = 220;
         int componentHeight = 32;
-        int y = 65;
-        int verticalGap = 37;
+        int y = 90;
+        int verticalGap = 40;
 
         // Common fonts used throughout the form
         Font labelFont = new Font("Arial", Font.BOLD, 18);
@@ -170,44 +170,13 @@ public class UpdatePatientPanel extends JPanel {
         weightTextField.setEditable(false);
         add(weightTextField);
 
-        // ================= BMI =================
-        // Displays calculated BMI value
-
-        y += verticalGap;
-
-        bmi = new JLabel("BMI:");
-        bmi.setBounds(labelX, y, labelWidth, componentHeight);
-        bmi.setFont(labelFont);
-        add(bmi);
-
-        bmiTextField = new JTextField();
-        bmiTextField.setBounds(textFieldX, y, textFieldWidth, componentHeight);
-        bmiTextField.setFont(textFieldFont);
-        bmiTextField.setEditable(false);
-        add(bmiTextField);
-
-        // ================= BMI CATEGORY =================
-        // Displays BMI classification
-
-        y += verticalGap;
-
-        bmiCategory = new JLabel("BMI Category:");
-        bmiCategory.setBounds(labelX, y, labelWidth, componentHeight);
-        bmiCategory.setFont(labelFont);
-        add(bmiCategory);
-
-        bmiCategoryTextField = new JTextField();
-        bmiCategoryTextField.setBounds(textFieldX, y, textFieldWidth, componentHeight);
-        bmiCategoryTextField.setFont(textFieldFont);
-        bmiCategoryTextField.setEditable(false);
-        add(bmiCategoryTextField);
 
         // Back Button (Left Side)
         // Returns user to the welcome screen
 
         backBtn = new JButton("Back");
         backBtn.setFont(new Font("Arial", Font.BOLD, 18));
-        backBtn.setBounds(110, 405, 130, 40);
+        backBtn.setBounds(110, 390, 130, 40);
         add(backBtn);
 
         // Search Button (Right Side)
@@ -215,13 +184,13 @@ public class UpdatePatientPanel extends JPanel {
 
         searchBtn = new JButton("Search");
         searchBtn.setFont(new Font("Arial", Font.BOLD, 18));
-        searchBtn.setBounds(340, 65, 120, 30);
+        searchBtn.setBounds(340, 90, 120, 32);
         add(searchBtn);
 
-        saveBtn = new JButton("Save");
-        saveBtn.setFont(new Font("Arial", Font.BOLD, 18));
-        saveBtn.setBounds(290, 405, 130, 40);
-        add(saveBtn);
+        updateBtn = new JButton("Update");
+        updateBtn.setFont(new Font("Arial", Font.BOLD, 18));
+        updateBtn.setBounds(290, 390, 130, 40);
+        add(updateBtn);
 
     }
 
@@ -260,16 +229,6 @@ public class UpdatePatientPanel extends JPanel {
         return weightTextField;
     }
 
-    // Returns BMI display field
-    public JTextField getBmiTextField() {
-        return bmiTextField;
-    }
-
-    // Returns BMI category display field
-    public JTextField getBmiCategoryTextField() {
-        return bmiCategoryTextField;
-    }
-
     // Setter methods used to update UI components if required
 
     public void setNameTextField(JTextField nameTextField) {
@@ -296,21 +255,13 @@ public class UpdatePatientPanel extends JPanel {
         this.weightTextField = weightTextField;
     }
 
-    public void setBmiTextField(JTextField bmiTextField) {
-        this.bmiTextField = bmiTextField;
-    }
-
-    public void setBmiCategoryTextField(JTextField bmiCategoryTextField) {
-        this.bmiCategoryTextField = bmiCategoryTextField;
-    }
-
     public JButton getSearchBtn(){
         return searchBtn;
     }
 
     // Returns Save button reference
-    public JButton getSaveBtn() {
-        return saveBtn;
+    public JButton getUpdateBtn() {
+        return updateBtn;
     }
 
     // Returns Back button reference

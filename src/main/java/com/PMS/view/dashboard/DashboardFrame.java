@@ -1,9 +1,6 @@
 package com.PMS.view.dashboard;
 
-import com.PMS.controller.DashboardController.panelController.AddPatientController;
-import com.PMS.controller.DashboardController.panelController.DeletePatientController;
-import com.PMS.controller.DashboardController.panelController.SearchPatientController;
-import com.PMS.controller.DashboardController.panelController.ViewAllPatientsController;
+import com.PMS.controller.DashboardController.panelController.*;
 import com.PMS.view.dashboard.panels.*;
 
 import javax.swing.*;
@@ -224,6 +221,7 @@ public class DashboardFrame extends JFrame {
         contentPanel.add(addPatientPanel, "ADD_PATIENT");
 
         updatePatientPanel = new UpdatePatientPanel();
+        new UpdatePatientController(this,updatePatientPanel);
         contentPanel.add(updatePatientPanel, "UPDATE_PATIENT");
 
         searchPatientPanel = new SearchPatientPanel();
