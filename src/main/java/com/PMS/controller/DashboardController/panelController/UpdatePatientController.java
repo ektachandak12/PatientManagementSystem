@@ -10,29 +10,77 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*
+ * UpdatePatientController:
+ *
+ * Handles all operations related to updating an existing patient record.
+ *
+ * Main responsibilities:
+ * 1. Search a patient using Patient ID.
+ * 2. Display the patient's existing details.
+ * 3. Allow the user to edit those details.
+ * 4. Save the updated information to the database.
+ * 5. Navigate back to the dashboard when required.
+ *
+ * This controller acts as a bridge between:
+ * - UpdatePatientPanel (View)
+ * - PatientDAO (Database operations)
+ * - Patient Entity (Data object)
+ *
+ * Workflow:
+ * Search Patient -> Load Details -> Enable Editing
+ * -> Update Details -> Save Changes to Database
+ */
 public class UpdatePatientController implements ActionListener {
 
+    // Reference to main dashboard window
     DashboardFrame dashboardFrame;
 
+    // Reference to update patient form
     UpdatePatientPanel updatePatientPanel;
 
+    /*
+     * Stores the original patient retrieved from the database.
+     *
+     * This is important because:
+     * - It allows comparison between old and new values.
+     * - It preserves the original patient ID.
+     * - It ensures the correct database record is updated.
+     */
     private Patient originalPatient;
 
+    /*
+     * Constructor:
+     * Connects controller with panel and registers button listeners.
+     */
     public UpdatePatientController(DashboardFrame dashboardFrame, UpdatePatientPanel updatePatientPanel) {
+
         this.dashboardFrame = dashboardFrame;
         this.updatePatientPanel = updatePatientPanel;
 
+        // Register controller as listener for all buttons
         updatePatientPanel.getSearchBtn().addActionListener(this);
         updatePatientPanel.getUpdateBtn().addActionListener(this);
         updatePatientPanel.getBackBtn().addActionListener(this);
-
     }
 
+    /*
+     * actionPerformed():
+     * Automatically executes whenever a registered button is clicked.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        // ==================================================
+        // BACK BUTTON LOGIC
+        // ==================================================
         if (e.getSource() == updatePatientPanel.getBackBtn()) {
 
+            /*
+             * Clear all text fields before leaving the screen.
+             * This prevents old patient data from appearing
+             * when the panel is opened again.
+             */
             updatePatientPanel.getIdTextField().setText("");
             updatePatientPanel.getNameTextField().setText("");
             updatePatientPanel.getAgeTextField().setText("");
@@ -41,35 +89,59 @@ public class UpdatePatientController implements ActionListener {
             updatePatientPanel.getHeightTextField().setText("");
             updatePatientPanel.getWeightTextField().setText("");
 
+            // Get CardLayout used by dashboard content panel
+            CardLayout c1 =
+                    (CardLayout) dashboardFrame.getContentPanel().getLayout();
 
-            // Get CardLayout used by the dashboard content panel
-            CardLayout c1 = (CardLayout) dashboardFrame.getContentPanel().getLayout();
-
-            // Navigate back to the welcome screen
-            c1.show(dashboardFrame.getContentPanel(), "WELCOME");
+            // Switch back to welcome screen
+            c1.show(
+                    dashboardFrame.getContentPanel(),
+                    "WELCOME"
+            );
         }
 
+        // ==================================================
+        // SEARCH BUTTON LOGIC
+        // ==================================================
         else if(e.getSource() ==  updatePatientPanel.getSearchBtn()) {
-            try{
 
-                // Read and convert entered patient ID to integer
+            try {
+
+                /*
+                 * Read patient ID entered by user and convert it
+                 * from String to int.
+                 */
                 int searchId = Integer.parseInt(
                         updatePatientPanel.getIdTextField().getText()
                 );
 
-                // Create DAO object to interact with patient database
+                // Create DAO object for database operations
                 PatientDAO patientDAO = new PatientDAO();
 
-                // Search patient using entered ID
-                Patient patient = patientDAO.searchPatient(searchId);
+                // Search patient record using ID
+                Patient patient =
+                        patientDAO.searchPatient(searchId);
 
+                // Print patient details in console (debugging)
                 System.out.println(patient);
 
                 try {
 
-                    // If patient exists, display all retrieved details
+                    /*
+                     * If patient exists:
+                     * - Store original record
+                     * - Display data on screen
+                     * - Allow editing
+                     */
                     if (patient != null) {
 
+                        /*
+                         * Store original database record.
+                         *
+                         * This object is later used during update
+                         * to identify which patient record must
+                         * be modified.
+                         */
                         originalPatient = patient;
 
                         // Display patient name
@@ -78,7 +150,9 @@ public class UpdatePatientController implements ActionListener {
 
                         // Display patient age
                         updatePatientPanel.getAgeTextField()
-                                .setText(String.valueOf(patient.getAge()));
+                                .setText(
+                                        String.valueOf(patient.getAge())
+                                );
 
                         // Display patient gender
                         updatePatientPanel.getGenderTextField()
@@ -90,97 +164,170 @@ public class UpdatePatientController implements ActionListener {
 
                         // Display patient height
                         updatePatientPanel.getHeightTextField()
-                                .setText(String.valueOf(patient.getHeight()));
+                                .setText(
+                                        String.valueOf(patient.getHeight())
+                                );
 
                         // Display patient weight
                         updatePatientPanel.getWeightTextField()
-                                .setText(String.valueOf(patient.getWeight()));
+                                .setText(
+                                        String.valueOf(patient.getWeight())
+                                );
 
-                        // Make fields editable after search
-                        updatePatientPanel.getNameTextField().setEditable(true);
-                        updatePatientPanel.getAgeTextField().setEditable(true);
-                        updatePatientPanel.getGenderTextField().setEditable(true);
-                        updatePatientPanel.getCityTextField().setEditable(true);
-                        updatePatientPanel.getHeightTextField().setEditable(true);
-                        updatePatientPanel.getWeightTextField().setEditable(true);
+                        /*
+                         * Initially fields are non-editable.
+                         *
+                         * Once a valid patient is found,
+                         * allow the user to modify values.
+                         */
+                        updatePatientPanel.getNameTextField()
+                                .setEditable(true);
+
+                        updatePatientPanel.getAgeTextField()
+                                .setEditable(true);
+
+                        updatePatientPanel.getGenderTextField()
+                                .setEditable(true);
+
+                        updatePatientPanel.getCityTextField()
+                                .setEditable(true);
+
+                        updatePatientPanel.getHeightTextField()
+                                .setEditable(true);
+
+                        updatePatientPanel.getWeightTextField()
+                                .setEditable(true);
 
                     } else {
 
-                        // Show message if no patient record is found
+                        // No patient found with entered ID
                         JOptionPane.showMessageDialog(
                                 updatePatientPanel,
                                 "Patient not found"
                         );
 
-
                         return;
                     }
+
                 } catch (Exception ex) {
 
-                    // Print detailed error in console for debugging
+                    // Print detailed error for debugging
                     ex.printStackTrace();
 
-                    // Show generic error message to user
+                    // Show generic message to user
                     JOptionPane.showMessageDialog(
                             updatePatientPanel,
                             "Something went wrong!"
                     );
                 }
-            }
-            catch(NumberFormatException ex){
 
-                // Handles invalid ID input such as letters or special characters
+            } catch(NumberFormatException ex){
+
+                /*
+                 * Triggered when entered ID is not numeric.
+                 * Example:
+                 * abc
+                 * 12a
+                 * @#$%
+                 */
                 JOptionPane.showMessageDialog(
                         updatePatientPanel,
                         "Please enter a valid numeric ID"
                 );
             }
-
         }
 
+        // ==================================================
+        // UPDATE BUTTON LOGIC
+        // ==================================================
         else if (e.getSource() == updatePatientPanel.getUpdateBtn()) {
 
             try {
 
+                /*
+                 * Prevent update without searching first.
+                 *
+                 * If originalPatient is null,
+                 * no patient has been loaded yet.
+                 */
                 if (originalPatient == null) {
+
                     JOptionPane.showMessageDialog(
                             updatePatientPanel,
                             "Please search a patient first!"
                     );
+
                     return;
                 }
 
+                /*
+                 * Create a new Patient object containing
+                 * updated values entered by the user.
+                 */
                 Patient updatedPatient = new Patient();
 
+                /*
+                 * Preserve original ID.
+                 *
+                 * ID is used to identify which database
+                 * record must be updated.
+                 */
                 updatedPatient.setId(originalPatient.getId());
 
-                updatedPatient.setName(updatePatientPanel.getNameTextField().getText());
+                // Read updated name
+                updatedPatient.setName(
+                        updatePatientPanel.getNameTextField().getText()
+                );
 
-                updatedPatient.setAge(Integer.parseInt(
-                        updatePatientPanel.getAgeTextField().getText()
-                ));
+                // Read updated age
+                updatedPatient.setAge(
+                        Integer.parseInt(
+                                updatePatientPanel.getAgeTextField().getText()
+                        )
+                );
 
-                updatedPatient.setGender(updatePatientPanel.getGenderTextField().getText());
+                // Read updated gender
+                updatedPatient.setGender(
+                        updatePatientPanel.getGenderTextField().getText()
+                );
 
-                updatedPatient.setCity(updatePatientPanel.getCityTextField().getText());
+                // Read updated city
+                updatedPatient.setCity(
+                        updatePatientPanel.getCityTextField().getText()
+                );
 
-                updatedPatient.setHeight(Double.parseDouble(
-                        updatePatientPanel.getHeightTextField().getText()
-                ));
+                // Read updated height
+                updatedPatient.setHeight(
+                        Double.parseDouble(
+                                updatePatientPanel.getHeightTextField().getText()
+                        )
+                );
 
-                updatedPatient.setWeight(Double.parseDouble(
-                        updatePatientPanel.getWeightTextField().getText()
-                ));
+                // Read updated weight
+                updatedPatient.setWeight(
+                        Double.parseDouble(
+                                updatePatientPanel.getWeightTextField().getText()
+                        )
+                );
 
+                // Create DAO object
                 PatientDAO patientDAO = new PatientDAO();
 
-                boolean isUpdated = patientDAO.updatePatient(
-                        originalPatient,
-                        updatedPatient
-                );
+                /*
+                 * Update database record.
+                 *
+                 * originalPatient = old values
+                 * updatedPatient  = new values
+                 */
+                boolean isUpdated =
+                        patientDAO.updatePatient(
+                                originalPatient,
+                                updatedPatient
+                        );
 
                 if (isUpdated) {
 
+                    // Print updated data for debugging
                     System.out.println(updatedPatient);
 
                     JOptionPane.showMessageDialog(
@@ -188,11 +335,20 @@ public class UpdatePatientController implements ActionListener {
                             "Patient updated successfully!"
                     );
 
-                    // refresh original object
+                    /*
+                     * Refresh originalPatient reference.
+                     *
+                     * This ensures future updates compare
+                     * against latest saved values.
+                     */
                     originalPatient = updatedPatient;
 
                 } else {
 
+                    /*
+                     * No update occurred because all entered
+                     * values are identical to existing values.
+                     */
                     JOptionPane.showMessageDialog(
                             updatePatientPanel,
                             "No changes detected!"
@@ -201,12 +357,17 @@ public class UpdatePatientController implements ActionListener {
 
             } catch (NumberFormatException ex) {
 
+                /*
+                 * Triggered when numeric fields contain
+                 * invalid values.
+                 */
                 JOptionPane.showMessageDialog(
                         updatePatientPanel,
                         "Please enter valid numeric values!"
                 );
 
             } catch (Exception ex) {
+
                 ex.printStackTrace();
 
                 JOptionPane.showMessageDialog(

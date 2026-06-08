@@ -225,8 +225,8 @@ public class DashboardFrame extends JFrame {
         contentPanel.add(updatePatientPanel, "UPDATE_PATIENT");
 
         searchPatientPanel = new SearchPatientPanel();
-        contentPanel.add(searchPatientPanel, "SEARCH_PATIENT");
         new SearchPatientController(this, searchPatientPanel);
+        contentPanel.add(searchPatientPanel, "SEARCH_PATIENT");
 
         viewAllPatientsPanel = new ViewAllPatientsPanel();
         new ViewAllPatientsController(this, viewAllPatientsPanel);

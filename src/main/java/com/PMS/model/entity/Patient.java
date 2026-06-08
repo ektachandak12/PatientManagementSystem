@@ -73,6 +73,7 @@ public class Patient {
      * Used to read and update patient information.
      */
 
+    // Sets patient's id
     public void setId(int id) {
         this.id = id;
     }

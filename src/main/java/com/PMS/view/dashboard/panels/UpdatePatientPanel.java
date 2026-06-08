@@ -3,42 +3,44 @@ package com.PMS.view.dashboard.panels;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+ * UpdatePatientPanel:
+ * Provides UI for searching a patient by ID
+ * and updating patient details.
+ */
 public class UpdatePatientPanel extends JPanel {
-    // Labels used to display field names
-    JLabel heading, id, name, age, gender, city, height, weight, bmi, bmiCategory;
 
-    // Text field used to enter patient ID for searching
+    // Labels for form fields
+    JLabel heading, id, name, age, gender, city, height, weight;
+
+    // Field used to enter patient ID
     JTextField idTextField;
 
-    // Buttons for searching patient and returning to previous screen
+    // Buttons for panel actions
     JButton searchBtn, updateBtn, backBtn;
 
-    // Text fields used to display retrieved patient details
+    // Fields used to display and edit patient details
     JTextField nameTextField;
     JTextField ageTextField;
     JTextField cityTextField;
     JTextField genderTextField;
     JTextField heightTextField;
     JTextField weightTextField;
-    JTextField bmiTextField;
-    JTextField bmiCategoryTextField;
 
-    public UpdatePatientPanel(){
+    public UpdatePatientPanel() {
         initialize();
     }
 
-    /*
-     * Creates and arranges all UI components of the panel.
-     */
-    private void initialize(){
+    // Creates and arranges all UI components
+    private void initialize() {
 
-        // Using null layout for manual component positioning
+        // Using null layout for custom positioning
         setLayout(null);
 
         // Set panel background color
         setBackground(Color.WHITE);
 
-        // Main heading of the panel
+        // Panel heading
         heading = new JLabel("Update Patient Record");
         heading.setFont(new Font("Times New Roman", Font.BOLD, 30));
         heading.setBounds(110, 20, 320, 40);
@@ -46,7 +48,7 @@ public class UpdatePatientPanel extends JPanel {
         heading.setHorizontalAlignment(SwingConstants.CENTER);
         add(heading);
 
-        // Common positioning variables used for alignment
+        // Common positioning variables
         int labelX = 80;
         int textFieldX = 240;
         int labelWidth = 160;
@@ -55,13 +57,12 @@ public class UpdatePatientPanel extends JPanel {
         int y = 90;
         int verticalGap = 40;
 
-        // Common fonts used throughout the form
         Font labelFont = new Font("Arial", Font.BOLD, 18);
         Font textFieldFont = new Font("Arial", Font.PLAIN, 16);
 
         // ================= ID =================
-        // User enters patient ID here
 
+        // Enter patient ID for searching
         id = new JLabel("ID:");
         id.setBounds(100, y, 50, componentHeight);
         id.setFont(labelFont);
@@ -73,7 +74,6 @@ public class UpdatePatientPanel extends JPanel {
         add(idTextField);
 
         // ================= NAME =================
-        // Displays patient name after search
 
         y += verticalGap;
 
@@ -86,12 +86,11 @@ public class UpdatePatientPanel extends JPanel {
         nameTextField.setBounds(textFieldX, y, textFieldWidth, componentHeight);
         nameTextField.setFont(textFieldFont);
 
-        // Prevent user from editing retrieved data
+        // Disabled until patient is searched
         nameTextField.setEditable(false);
         add(nameTextField);
 
         // ================= AGE =================
-        // Displays patient age
 
         y += verticalGap;
 
@@ -107,7 +106,6 @@ public class UpdatePatientPanel extends JPanel {
         add(ageTextField);
 
         // ================= GENDER =================
-        // Displays patient gender
 
         y += verticalGap;
 
@@ -123,7 +121,6 @@ public class UpdatePatientPanel extends JPanel {
         add(genderTextField);
 
         // ================= CITY =================
-        // Displays patient city
 
         y += verticalGap;
 
@@ -139,7 +136,6 @@ public class UpdatePatientPanel extends JPanel {
         add(cityTextField);
 
         // ================= HEIGHT =================
-        // Displays patient height in metres
 
         y += verticalGap;
 
@@ -155,7 +151,6 @@ public class UpdatePatientPanel extends JPanel {
         add(heightTextField);
 
         // ================= WEIGHT =================
-        // Displays patient weight in kilograms
 
         y += verticalGap;
 
@@ -170,101 +165,103 @@ public class UpdatePatientPanel extends JPanel {
         weightTextField.setEditable(false);
         add(weightTextField);
 
+        // ================= BUTTONS =================
 
-        // Back Button (Left Side)
-        // Returns user to the welcome screen
-
+        // Returns to dashboard welcome screen
         backBtn = new JButton("Back");
         backBtn.setFont(new Font("Arial", Font.BOLD, 18));
         backBtn.setBounds(110, 390, 130, 40);
         add(backBtn);
 
-        // Search Button (Right Side)
         // Searches patient using entered ID
-
         searchBtn = new JButton("Search");
         searchBtn.setFont(new Font("Arial", Font.BOLD, 18));
         searchBtn.setBounds(340, 90, 120, 32);
         add(searchBtn);
 
+        // Saves updated patient details
         updateBtn = new JButton("Update");
         updateBtn.setFont(new Font("Arial", Font.BOLD, 18));
         updateBtn.setBounds(290, 390, 130, 40);
         add(updateBtn);
-
     }
 
-    // Returns entered patient ID field
+    // Returns patient ID field
     public JTextField getIdTextField() {
         return idTextField;
     }
 
-    // Returns name display field
+    // Returns name field
     public JTextField getNameTextField() {
         return nameTextField;
     }
 
-    // Returns age display field
+    // Returns age field
     public JTextField getAgeTextField() {
         return ageTextField;
     }
 
-    // Returns gender display field
+    // Returns gender field
     public JTextField getGenderTextField() {
         return genderTextField;
     }
 
-    // Returns city display field
+    // Returns city field
     public JTextField getCityTextField() {
         return cityTextField;
     }
 
-    // Returns height display field
+    // Returns height field
     public JTextField getHeightTextField() {
         return heightTextField;
     }
 
-    // Returns weight display field
+    // Returns weight field
     public JTextField getWeightTextField() {
         return weightTextField;
     }
 
-    // Setter methods used to update UI components if required
-
+    // Updates name field reference
     public void setNameTextField(JTextField nameTextField) {
         this.nameTextField = nameTextField;
     }
 
+    // Updates age field reference
     public void setAgeTextField(JTextField ageTextField) {
         this.ageTextField = ageTextField;
     }
 
+    // Updates city field reference
     public void setCityTextField(JTextField cityTextField) {
         this.cityTextField = cityTextField;
     }
 
+    // Updates gender field reference
     public void setGenderTextField(JTextField genderTextField) {
         this.genderTextField = genderTextField;
     }
 
+    // Updates height field reference
     public void setHeightTextField(JTextField heightTextField) {
         this.heightTextField = heightTextField;
     }
 
+    // Updates weight field reference
     public void setWeightTextField(JTextField weightTextField) {
         this.weightTextField = weightTextField;
     }
 
-    public JButton getSearchBtn(){
+    // Returns Search button
+    public JButton getSearchBtn() {
         return searchBtn;
     }
 
-    // Returns Save button reference
+    // Returns Update button
     public JButton getUpdateBtn() {
         return updateBtn;
     }
 
-    // Returns Back button reference
+    // Returns Back button
     public JButton getBackBtn() {
         return backBtn;
     }
