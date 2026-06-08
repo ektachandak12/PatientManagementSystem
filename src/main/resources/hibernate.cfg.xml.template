@@ -1,0 +1,14 @@
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">YOUR_DB_URL</property>
+        <property name="hibernate.connection.username">YOUR_DB_USERNAME</property>
+        <property name="hibernate.connection.password">YOUR_DB_PASSWORD</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <mapping class="com.PMS.model.entity.Patient"/>
+        <mapping class="com.PMS.model.entity.Doctor"/>
+    </session-factory>
+</hibernate-configuration>
