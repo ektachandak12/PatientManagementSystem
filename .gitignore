@@ -14,6 +14,10 @@
 .idea/
 target/
 
+# Sensitive configuration
+.env
+src/main/resources/hibernate.cfg.xml
+
 
 ### Eclipse ###
 .apt_generated
