@@ -40,7 +40,7 @@ A Java-based desktop application for managing patient medical records in a healt
 | Layer | Technology |
 |---|---|
 | Language | Java 11 |
-| Build Tool | Apache Maven -3.9.11 |
+| Build Tool | Apache Maven 3.9.11 |
 | GUI Framework | Java Swing (`javax.swing`) |
 | ORM | Hibernate 6.5.2 |
 | Persistence API | Jakarta Persistence API (JPA) 3.1.0 |
