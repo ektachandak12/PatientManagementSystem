@@ -1,9 +1,9 @@
 # 🏥 Patient Management System
 
 ![Java](https://img.shields.io/badge/Java-11-007396?style=flat&logo=java&logoColor=white)
-![Maven](https://img.shields.io/badge/Maven-3.x-C71A36?style=flat&logo=apachemaven&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-3.9.11-C71A36?style=flat&logo=apachemaven&logoColor=white)
 ![Hibernate](https://img.shields.io/badge/Hibernate-6.5.2-59666C?style=flat&logo=hibernate&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?style=flat&logo=mysql&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0.43-4479A1?style=flat&logo=mysql&logoColor=white)
 ![Swing](https://img.shields.io/badge/GUI-Java%20Swing-orange?style=flat)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat)
 
@@ -40,11 +40,11 @@ A Java-based desktop application for managing patient medical records in a healt
 | Layer | Technology |
 |---|---|
 | Language | Java 11 |
-| Build Tool | Apache Maven |
+| Build Tool | Apache Maven -3.9.11 |
 | GUI Framework | Java Swing (`javax.swing`) |
 | ORM | Hibernate 6.5.2 |
 | Persistence API | Jakarta Persistence API (JPA) 3.1.0 |
-| Database | MySQL (via `mysql-connector-j` 9.4.0) |
+| Database | MySQL (via `mysql-connector-j` 8.0.43) |
 | Testing | JUnit 3.8.1 |
 
 ---
